@@ -11,20 +11,20 @@ class GildedRoseTest extends TestCase
     /**
      * @test
      */
-    public function items_degradan_calidad()
+    public function itemsDegradeQuality()
     {
-        $items = [new Item('', 0, 5)];
+        $items = [new Item('', 1, 5)];
 
   		$gilded_rose = new GildedRose($items);
         $gilded_rose->update_quality();
 
-  		$this->assertEquals(3, $items[0]->quality);
+        $this->assertEquals(4, $items[0]->quality);
   	}
 
     /**
      * @test
      */
-  	public function venta_pasada_calidad_degrada_doble()
+    public function itemsDegradeDoubleQualityOnceTheSellInDateHasPass()
     {
   		$items = [new Item('', -1, 5)];
 
@@ -37,7 +37,7 @@ class GildedRoseTest extends TestCase
     /**
      * @test
      */
-  	public function calidad_nunca_negativa()
+    public function itemsCannotHaveNegativeQuality()
     {
   		$items = [new Item('', 0, 0)];
 
@@ -50,7 +50,7 @@ class GildedRoseTest extends TestCase
     /**
      * @test
      */
-  	public function aged_brie_incrementa_calidad()
+    public function agedBrieIncreasesQualityOverTime()
     {
   		$items = [new Item('Aged Brie', 0, 5)];
 
@@ -63,7 +63,7 @@ class GildedRoseTest extends TestCase
     /**
      * @test
      */
-  	public function calidad_nunca_mayor_de_50()
+    public function qualityCannotBeGreaterThan50()
     {
   		$items = [new Item('Aged Brie', 0, 50)];
 
@@ -76,7 +76,7 @@ class GildedRoseTest extends TestCase
     /**
      * @test
      */
-  	public function sulfuras_no_cambia()
+    public function sulfurasDoesNotChange()
     {
   		$items = [new Item('Sulfuras, Hand of Ragnaros', 10, 10)];
 
@@ -87,7 +87,7 @@ class GildedRoseTest extends TestCase
   		$this->assertEquals(10, $items[0]->quality);
   	}
 
-  	public static function backstage_rules()
+    public static function backstageRules()
     {
   		return [
   			'incr. 1 if sellIn > 10' => [11, 10, 11],
@@ -100,10 +100,11 @@ class GildedRoseTest extends TestCase
   		];
   	}
 
-  	/**
-  	 * @dataProvider backstage_rules
-  	 */
-  	public function backstage_passes_incrementan_calidad_cada_vez_mas($sellIn, $quality, $expected)
+    /**
+     * @dataProvider backstageRules
+     * @test
+     */
+    public function backstageQualityIncreaseOverTimeWithCertainRules($sellIn, $quality, $expected)
     {
   		$items = [new Item('Backstage passes to a TAFKAL80ETC concert', $sellIn, $quality)];
 
