@@ -1,0 +1,26 @@
+{
+    "name": "runroom/backend",
+    "description": "Test for Backend",
+    "type": "library",
+    "require": {
+        "phpunit/phpunit": "^6.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jordi Sala Morales",
+            "email": "jordism91@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Runroom\\GildedRose\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Runroom\\GildedRose\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable"
+}
